@@ -252,3 +252,10 @@ header {
 .continue-shopping-btn:hover {
   background-color: #388e3c;
 }
+
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

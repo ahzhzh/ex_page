@@ -2,6 +2,7 @@
 
 import { useCart } from '../../context/CartContext';
 import Link from 'next/link';
+import { useEffect, useCallback } from 'react';
 
 const CartPage = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -14,7 +15,7 @@ const CartPage = () => {
       ) : (
         <div className="cart-items">
           {cartItems.map((item) => (
-            <div key={item.id} className="cart-item">
+            <div key={item.id || `${item.name}-${item.price}`} className="cart-item">
               <div className="cart-item-details">
                 <img src={item.image} alt={item.name} />
                 <p>{item.name}</p>

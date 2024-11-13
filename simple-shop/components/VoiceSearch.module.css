@@ -1,0 +1,29 @@
+.voiceSearch {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .voiceButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+  }
+  
+  .voiceButton:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  .voiceButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .response {
+    font-size: 0.9rem;
+    color: #666;
+  }

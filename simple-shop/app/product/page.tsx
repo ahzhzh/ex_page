@@ -1,41 +1,38 @@
-'use client'; // 클라이언트 컴포넌트로 지정
+'use client';
 
+import { useEffect, useState } from 'react';
 import { useCart } from '../../context/CartContext';
 import ProductCard from '../../components/ProductCard';
 import { Product } from '../../types/Product';
-
-const products: Product[] = [
-  {
-    id: 1,
-    name: '상품 1',
-    description: '상품 1 설명',
-    price: 100000,
-    image: '/pic/1-47e254e4.png',
-  },
-  {
-    id: 2,
-    name: '상품 2',
-    description: '상품 2 설명',
-    price: 200000,
-    image: '/pic/1-352481b5.png',
-  },
-  {
-    id: 3,
-    name: '상품 3',
-    description: '상품 3 설명',
-    price: 200000,
-    image: '/pic/21694499_1.png',
-  },
-  {
-    id: 4,
-    name: '상품 4',
-    description: '상품 4 설명',
-    price: 200000,
-    image: '/pic/67623665_1.png',
-  }
-];
+import VoiceSearch from '../../components/VoiceSearch';
 
 const ProductPage = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/products');
+        const data = await response.json();
+        // DB 데이터와 이미지를 매핑
+        const productsWithImages = data.map((item: any, index: number) => ({
+          id: item.c_id,
+          name: item.c_name,
+          price: item.c_price,
+          description: `${item.c_name} 설명`,  // 기본 설명 추가
+          image: `/pic/${(index % 4) + 1}.png`  // 기존 이미지 순환 사용
+        }));
+        setProducts(productsWithImages);
+      } catch (error) {
+        console.error('상품 데이터를 불러오는데 실패했습니다:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  
+
   return (
     <div className="product-page">
       <h1 className="product-title">상품 목록</h1>
@@ -43,6 +40,7 @@ const ProductPage = () => {
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
+        
       </div>
     </div>
   );

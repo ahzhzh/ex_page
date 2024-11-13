@@ -2,12 +2,16 @@ import { CartProvider } from '../context/CartContext';
 import '../styles/globals.css';
 import Link from 'next/link';
 import CartButton from '../components/CartButton'; // CartButton 컴포넌트 import
+import HeaderControls from '../components/HeaderControls';
+
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  
+  
   return (
     <CartProvider>
       <html lang="en">
@@ -20,7 +24,8 @@ export default function RootLayout({
                 <Link href="/" className="logo">
                   쇼핑몰
                 </Link>
-                <CartButton /> {/* 여기서 CartButton 사용 */}
+                <HeaderControls />
+                
               </div>
             </header>
 
